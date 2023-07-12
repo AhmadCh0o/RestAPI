@@ -15,8 +15,8 @@ export class UsersService {
       return this.prisma.users.findMany();
   }
 
-  findOne(id: number) {
-      return this.prisma.users.findUnique({ where: { id  } });
+  findOne(username: string) {
+      return this.prisma.users.findUnique({ where: { username } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
