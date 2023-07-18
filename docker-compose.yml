@@ -9,6 +9,8 @@ services:
       - POSTGRES_PASSWORD=project
     ports:
       - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
   api:
     image: node:18.16.1
     command: [ 'tail', '-f', '/dev/null' ]
@@ -16,4 +18,7 @@ services:
       - ./:/app
     ports:
       - '3000:3000'
+volumes:
+  db:
+    driver: local
  
