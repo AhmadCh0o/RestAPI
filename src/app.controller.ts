@@ -6,11 +6,7 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @UseGuards()
-  @Post('login')
-  login(@Request() req): any {
-    return { msg: 'Logged in!' };
-  }
+
 
   @UseGuards()
   @Get()

@@ -8,6 +8,20 @@ import * as passport from 'passport';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.use(session({
+    name: 'NESTJS_SESSION_ID',
+    secret: 'RANDOMWORDSTHATARESUPPOSETOBEKEPTASECRET',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60000,
+    },
+  }),
+  );
+  
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   const config = new DocumentBuilder()
     .setTitle('Median')
     .setDescription('The Median API description')
