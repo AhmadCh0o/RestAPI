@@ -17,8 +17,9 @@ export class UsersController {
     const users = await this.usersService.allUsers();
     const serializedUsers = users.map(user => new SerializedUser(user));
     return serializedUsers;
+  
   }
-
+ 
   // Create user
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('create')
@@ -42,8 +43,8 @@ export class UsersController {
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards()
   @Get('username/:username')
-  async findOne(@Param('username') username: string) {
-    const user = await this.usersService.findOne(username);
+  async findOneByUsername(@Param('username') username: string) {
+    const user = await this.usersService.findOneByUsername(username);
     if (user) return new SerializedUser(user);
     else throw new HttpException('User Not Found', HttpStatus.BAD_REQUEST);
   }
