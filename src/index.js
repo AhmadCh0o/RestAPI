@@ -2,13 +2,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Login from './pages/login/Login'; // Import the Login component
 import reportWebVitals from './reportWebVitals';
+import Signup from './pages/SignUp/SignUp';
 
 ReactDOM.render(
   <React.StrictMode>
 
-    <Login /> {/* Render the Login component */}
+    <Signup /> {/* Render the Login component */}
 
   
   </React.StrictMode>,
