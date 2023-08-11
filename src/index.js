@@ -1,18 +1,25 @@
-// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Signup from './pages/SignUp/SignUp';
+import App from './App';
 
-ReactDOM.render(
-  <React.StrictMode>
-
-    <Signup /> {/* Render the Login component */}
-
-  
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// Determine the appropriate rendering method based on the React version
+const rootElement = document.getElementById('root');
+if (React.version.startsWith('18')) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+} else {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    rootElement
+  );
+}
 
 reportWebVitals();
