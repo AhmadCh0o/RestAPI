@@ -9,6 +9,7 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -27,7 +28,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/users/login', {
+      const response = await fetch('http://localhost:4000/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +81,6 @@ const Login = () => {
           <Link to="/login" className="login-navbar-link login-nav-current-page">Login</Link>
         </div>
       </nav>
-
       <div className="login-container">
         <div className="login-form">
           <h2>Login</h2>

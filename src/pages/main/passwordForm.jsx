@@ -9,37 +9,42 @@ function PasswordForm() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const { post, error } = useFetch('http://localhost:3000'); // Adjust API endpoint
+
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+  const { post, error } = useFetch('http://localhost:4000', { headers });
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
     if (!token) {
       // No token exists, navigate to login page
       navigate('/login');
     }
-  }, [navigate]);
+  }, [navigate, token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!website) {
-      setErrorMessage('* Please fill in the website field.');
-      return;
-    } else if (!username) {
-      setErrorMessage('* Please fill in the username field');
-      return;
-    } else if (!password) {
-      setErrorMessage('* Please fill in the password field');
+  
+    if (!website || !username || !password) {
+      setErrorMessage('* Please fill in all fields.');
       return;
     }
-
+  
     try {
+      const token = localStorage.getItem('token');
+      const user = JSON.parse(atob(token.split('.')[1])); // Decoding the JWT token payload
       await post('passwords/create', {
         website,
         username,
         password,
+        userId: user.id, // Include the userId in the request body
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+  
 
       // Clear form after submission
       setWebsite('');
@@ -70,7 +75,6 @@ function PasswordForm() {
     // Navigate to the login page
     navigate('/login');
   };
-
   return (
     <div>
       {/* Navbar */}

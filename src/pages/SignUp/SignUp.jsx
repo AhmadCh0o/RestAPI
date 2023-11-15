@@ -8,7 +8,7 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { post, error } = useFetch('http://localhost:3000');
+  const { post, error } = useFetch('http://localhost:4000');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
